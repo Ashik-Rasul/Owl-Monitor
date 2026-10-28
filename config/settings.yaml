@@ -1,0 +1,40 @@
+app:
+  name: "Smart Log Analyzer Platform"
+  version: "3.0"
+
+logs:
+  auth_log: "/var/log/auth.log"
+  snort_log: "/var/log/snort/snort.alert.fast"
+
+rules:
+  path: "rules/"
+
+response:
+  admin_email: "ashikrasul888@gmail.com"
+  block_time_seconds: 3600
+
+network:
+  enabled: true
+  interface: ""
+
+fim:
+  enabled: true
+  check_interval: 60
+  targets:
+    - "/etc/passwd"
+    - "/etc/shadow"
+    - "/etc/group"
+    - "/etc/sudoers"
+    - "/etc/ssh/sshd_config"
+    - "/root/.ssh/authorized_keys"
+
+threat_intel:
+  abuseipdb:
+    enabled: true
+    api_key: ""
+  otx:
+    enabled: true
+    api_key: ""
+  virustotal:
+    enabled: true
+    api_key: ""

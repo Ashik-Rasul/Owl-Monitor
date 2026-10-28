@@ -1,0 +1,9 @@
+title: File Integrity Violation
+id: 3001
+logsource: fim
+detection:
+  condition: selection
+  selection:
+    event_type: fim_violation
+level: Critical
+action: alert_only

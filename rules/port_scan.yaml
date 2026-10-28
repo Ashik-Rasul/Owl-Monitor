@@ -1,0 +1,9 @@
+title: Port Scanning
+id: 2004
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: port_scan
+level: High
+action: block_ip

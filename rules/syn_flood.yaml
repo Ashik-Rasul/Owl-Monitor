@@ -1,0 +1,13 @@
+title: SYN Flood
+id: 2001
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: tcp_syn
+  threshold:
+    field: ip
+    count: 100
+    timeframe: 10
+level: High
+action: block_ip

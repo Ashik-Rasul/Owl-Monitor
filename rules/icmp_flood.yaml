@@ -1,0 +1,13 @@
+title: Ping/ICMP Flood
+id: 2002
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: icmp_ping
+  threshold:
+    field: ip
+    count: 50
+    timeframe: 10
+level: High
+action: block_ip

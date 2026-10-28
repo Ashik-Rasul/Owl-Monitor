@@ -1,0 +1,9 @@
+title: Suspicious Packet Patterns
+id: 2008
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: suspicious_packet
+level: Medium
+action: alert_only

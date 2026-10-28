@@ -1,0 +1,13 @@
+title: SSH Brute Force
+id: 1001
+logsource: auth
+detection:
+  condition: selection
+  selection:
+    event_type: failed_login
+  threshold:
+    field: ip
+    count: 5
+    timeframe: 120
+level: High
+action: block_ip

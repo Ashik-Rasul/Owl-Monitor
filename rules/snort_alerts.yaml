@@ -1,0 +1,9 @@
+title: Snort IDS Alert
+id: 1002
+logsource: snort
+detection:
+  condition: selection
+  selection:
+    event_type: snort_alert
+level: Critical
+action: block_ip

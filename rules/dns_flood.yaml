@@ -1,0 +1,13 @@
+title: DNS Flooding
+id: 2003
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: dns_query
+  threshold:
+    field: ip
+    count: 50
+    timeframe: 10
+level: High
+action: block_ip

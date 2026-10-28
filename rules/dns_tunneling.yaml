@@ -1,0 +1,9 @@
+title: DNS Tunneling
+id: 2006
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: dns_tunneling
+level: High
+action: block_ip

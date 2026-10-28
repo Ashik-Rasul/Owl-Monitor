@@ -1,0 +1,9 @@
+title: ARP Spoofing
+id: 2005
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: arp_spoofing
+level: Critical
+action: block_ip

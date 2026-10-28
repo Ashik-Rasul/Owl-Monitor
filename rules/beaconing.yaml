@@ -1,0 +1,9 @@
+title: Network Beaconing
+id: 2007
+logsource: network
+detection:
+  condition: selection
+  selection:
+    event_type: beaconing
+level: Medium
+action: alert_only

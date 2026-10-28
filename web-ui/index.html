@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owl Monitor — Security Operations Center (SOC)</title>
+    <meta name="description" content="Owl Monitor — Intelligent Host-Based Intrusion Detection and Threat Monitoring System">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- ─── Sidebar Navigation ──────────────────────────────────────── -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <div class="logo-icon-wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a4 4 0 0 0-4 4v1H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/>
+                        <circle cx="9" cy="13" r="1"/>
+                        <circle cx="15" cy="13" r="1"/>
+                        <path d="M12 16c-.7 0-1.2.3-1.5.8"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">OWL MONITOR</span>
+                    <span class="logo-tagline">SOC DEFENSE PLATFORM</span>
+                </div>
+            </div>
+
+            <div class="sidebar-meta">
+                <span class="env-pill">HOST-ALPHA-01</span>
+                <span class="version-tag">v3.0 CORE</span>
+            </div>
+
+            <nav>
+                <div class="nav-section-title">MONITORING</div>
+                <ul>
+                    <li class="active" data-page="dashboard">
+                        <a href="#" id="nav-dashboard">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li data-page="alerts">
+                        <a href="#" id="nav-alerts">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                            <span>Security Alerts</span>
+                            <span class="nav-badge" id="sidebar-alert-badge" style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <li data-page="network">
+                        <a href="#" id="nav-network">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <span>Network Monitoring</span>
+                        </a>
+                    </li>
+                    <li data-page="threat-intel">
+                        <a href="#" id="nav-threat-intel">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            <span>Threat Intelligence</span>
+                        </a>
+                    </li>
+                    <li data-page="fim">
+                        <a href="#" id="nav-fim">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>File Integrity (FIM)</span>
+                        </a>
+                    </li>
+                    <li data-page="auth">
+                        <a href="#" id="nav-auth">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <span>Authentication</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">POLICY & RESPONSE</div>
+                <ul>
+                    <li data-page="rules">
+                        <a href="#" id="nav-rules">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Detection Rules</span>
+                        </a>
+                    </li>
+                    <li data-page="firewall">
+                        <a href="#" id="nav-firewall">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v6"/><path d="M15 9v6"/><path d="M9 15v6"/></svg>
+                            <span>Firewall Responses</span>
+                        </a>
+                    </li>
+                    <li data-page="system">
+                        <a href="#" id="nav-system">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="4" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><line x1="6" x2="6.01" y1="8" y2="8"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+                            <span>System Status</span>
+                        </a>
+                    </li>
+                    <li data-page="settings">
+                        <a href="#" id="nav-settings">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.26.46.4.98.4 1.51V11a2 2 0 0 1 0 4h-.09c-.53 0-1.05.14-1.51.4z"/></svg>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="connection-status-pill" id="ws-status">
+                    <span class="status-indicator-dot disconnected"></span>
+                    <span class="status-indicator-text">WebSocket: Disconnected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ─── Main Content ─────────────────────────────────────────────── -->
+        <main class="content">
+            
+            <!-- Top Status Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1 id="page-title">Security Overview</h1>
+                    <span class="page-subtitle" id="page-subtitle">Real-time system security posture and threat detection stream</span>
+                </div>
+                <div class="top-bar-right">
+                    <!-- Section 4 Top Status Bar Indicators -->
+                    <div class="status-metric-group">
+                        <div class="soc-status-item">
+                            <span class="soc-status-label">SYSTEM</span>
+                            <span class="badge badge-success" id="system-status-badge"><span class="pulse-dot"></span> Online</span>
+                        </div>
+                        <div class="soc-status-item">
+                            <span class="soc-status-label">SOCKET</span>
+                            <span class="badge badge-neutral" id="topbar-ws-badge">Connecting…</span>
+                        </div>
+                        <div class="soc-status-item">
+                            <span class="soc-status-label">MONITORING</span>
+                            <span class="badge badge-info" id="topbar-monitoring-status">Active</span>
+                        </div>
+                        <div class="soc-status-item">
+                            <span class="soc-status-label">LAST EVENT</span>
+                            <span class="soc-timestamp-val" id="last-updated">None received</span>
+                        </div>
+                    </div>
+
+                    <button class="icon-btn" id="notification-btn" title="Alert Notifications">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                        <span class="notification-count" id="notif-count" style="display:none;">0</span>
+                    </button>
+                    <div class="avatar-soc" title="SOC Operator Active">SOC</div>
+                </div>
+            </header>
+
+            <!-- ════════════════ PAGE: Dashboard (Overview) ════════════════ -->
+            <div class="page" id="page-dashboard">
+                <div class="dashboard">
+                    
+                    <!-- Section 4: Security Statistics Cards (8 summary cards calculated strictly from real data) -->
+                    <div class="sec-metrics-grid">
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Total Security Events</h3>
+                                <span class="metric-icon-wrap info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                            </div>
+                            <div class="metric-value" id="metric-network-events">0</div>
+                            <div class="metric-footnote">Normalized Ingested Logs</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Total Confirmed Alerts</h3>
+                                <span class="metric-icon-wrap warning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+                            </div>
+                            <div class="metric-value" id="metric-active-alerts">0</div>
+                            <div class="metric-footnote">Matched Sigma Rules</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Critical Alerts</h3>
+                                <span class="metric-icon-wrap critical"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 22 22 22 12 2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="12" y1="19" x2="12.01" y2="19"/></svg></span>
+                            </div>
+                            <div class="metric-value color-critical" id="metric-critical-alerts">0</div>
+                            <div class="metric-footnote">Immediate Action Required</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>High-Severity Alerts</h3>
+                                <span class="metric-icon-wrap high"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></span>
+                            </div>
+                            <div class="metric-value color-high" id="metric-high-alerts">0</div>
+                            <div class="metric-footnote">High & Very High Rules</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Medium-Severity Alerts</h3>
+                                <span class="metric-icon-wrap medium"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                            </div>
+                            <div class="metric-value color-medium" id="metric-medium-alerts">0</div>
+                            <div class="metric-footnote">Suspicious Anomaly Patterns</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Low-Severity Alerts</h3>
+                                <span class="metric-icon-wrap low"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+                            </div>
+                            <div class="metric-value color-low" id="metric-low-alerts">0</div>
+                            <div class="metric-footnote">Informational Log Events</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Unique Source IPs</h3>
+                                <span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></span>
+                            </div>
+                            <div class="metric-value" id="metric-unique-ips">0</div>
+                            <div class="metric-footnote">Distinct Observed Hosts</div>
+                        </div>
+
+                        <div class="card metric-card">
+                            <div class="metric-header">
+                                <h3>Blocked IPs</h3>
+                                <span class="metric-icon-wrap critical"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></span>
+                            </div>
+                            <div class="metric-value color-critical" id="metric-blocked-ips">0</div>
+                            <div class="metric-footnote">Confirmed iptables Drops</div>
+                        </div>
+                    </div>
+
+                    <!-- Threat Level & Operational Health Banner -->
+                    <div class="card posture-card">
+                        <div class="posture-left">
+                            <div class="threat-level-badge-wrap">
+                                <span class="threat-level-badge" id="metric-threat-level">Low</span>
+                            </div>
+                            <div class="posture-text">
+                                <h3>Active Threat Level: <strong id="posture-level-title">Low</strong></h3>
+                                <p id="posture-level-desc">System operating under nominal conditions. No critical incidents detected in the active inspection window.</p>
+                            </div>
+                        </div>
+                        <div class="posture-right">
+                            <div class="system-health-pill">
+                                <span>Platform Health:</span>
+                                <strong class="color-success" id="metric-system-status">Healthy</strong>
+                            </div>
+                            <div class="system-health-pill">
+                                <span>Firewall Mitigations:</span>
+                                <strong id="overview-firewall-status">Active (iptables)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Grid: Recent Activity & Quick Modules -->
+                    <div class="main-grid split">
+                        <!-- Recent Security Activity Table (Section 4) -->
+                        <div class="card table-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>Recent Security Activity</h2>
+                                    <p class="card-subtitle">Real-time dynamic feed of detected threats and normalized security occurrences</p>
+                                </div>
+                                <span class="info-tag" id="event-counter">0 events</span>
+                            </div>
+                            <div class="table-container">
+                                <table class="soc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Category</th>
+                                            <th>Detection / Rule</th>
+                                            <th>Source IP</th>
+                                            <th>Severity</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="events-tbody">
+                                        <tr class="empty-row"><td colspan="6" class="empty-state">No security events detected yet. Monitoring active streams…</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Side Overview Cards -->
+                        <div class="side-modules">
+                            <!-- FIM Module Card -->
+                            <div class="card module-card" id="fim-module">
+                                <div class="card-header">
+                                    <h2>File Integrity (FIM)</h2>
+                                    <span class="badge badge-success" id="fim-badge">OK</span>
+                                </div>
+                                <div class="module-content" id="fim-content">
+                                    <div class="stat-row"><span>Monitored Critical Files</span><strong id="fim-target-count">6</strong></div>
+                                    <div class="stat-row"><span>Integrity Violations</span><strong id="fim-modified">0</strong></div>
+                                    <div class="stat-row"><span>Check Interval</span><strong id="fim-interval">60s</strong></div>
+                                    <div class="stat-row"><span>Baseline State</span><strong class="color-success" id="fim-status">Clean</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Threat Intelligence Snapshot -->
+                            <div class="card module-card">
+                                <div class="card-header">
+                                    <h2>Threat Intelligence</h2>
+                                    <span class="badge badge-info" id="ti-provider-badge">Active</span>
+                                </div>
+                                <div class="module-content">
+                                    <div class="stat-row"><span>Investigated IPs</span><strong id="ti-tracked-count">0</strong></div>
+                                    <div class="stat-row"><span>Flagged Malicious</span><strong class="color-high" id="ti-malicious-count">0</strong></div>
+                                    <div class="stat-row"><span>Known Botnets</span><strong class="color-critical" id="ti-botnet-count">0</strong></div>
+                                    <div class="stat-row"><span>Provider Mode</span><strong id="ti-feed-type">MockProvider / AbuseIPDB</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Automated Response Snapshot -->
+                            <div class="card module-card">
+                                <div class="card-header">
+                                    <h2>Automated SOAR</h2>
+                                    <span class="badge badge-success">Enabled</span>
+                                </div>
+                                <div class="module-content">
+                                    <div class="stat-row"><span>Total Network Events</span><strong id="net-total">0</strong></div>
+                                    <div class="stat-row"><span>Firewall Drop Rules</span><strong class="color-critical" id="net-blocked">0</strong></div>
+                                    <div class="stat-row"><span>Block Duration</span><strong>3600s</strong></div>
+                                    <div class="stat-row"><span>Email Cooldown</span><strong>300s (Rate-limited)</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Security Alerts (Section 5, 6, 7) ════════════════ -->
+            <div class="page hidden" id="page-alerts">
+                <div class="dashboard">
+                    
+                    <!-- Alert Category Navigation Tabs (Section 5) -->
+                    <div class="category-tabs-bar">
+                        <button class="cat-tab active" data-cat="all">All Alerts (<span id="cat-count-all">0</span>)</button>
+                        <button class="cat-tab" data-cat="auth">Authentication (<span id="cat-count-auth">0</span>)</button>
+                        <button class="cat-tab" data-cat="network">Network Security (<span id="cat-count-network">0</span>)</button>
+                        <button class="cat-tab" data-cat="fim">File Integrity (<span id="cat-count-fim">0</span>)</button>
+                        <button class="cat-tab" data-cat="ti">Threat Intel (<span id="cat-count-ti">0</span>)</button>
+                        <button class="cat-tab" data-cat="system">System Security (<span id="cat-count-system">0</span>)</button>
+                    </div>
+
+                    <!-- Alert Filters and Search (Section 7) -->
+                    <div class="card filter-bar-card">
+                        <div class="filter-controls-grid">
+                            <div class="search-box-wrap">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <input type="text" id="alert-search-input" placeholder="Search by Source IP, Username, Detection or Rule..." aria-label="Search alerts">
+                            </div>
+
+                            <div class="filter-dropdown-wrap">
+                                <label for="filter-severity">Severity:</label>
+                                <select id="filter-severity">
+                                    <option value="all">All Severities</option>
+                                    <option value="Critical">Critical</option>
+                                    <option value="High">High / Very High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-dropdown-wrap">
+                                <label for="filter-collector">Collector:</label>
+                                <select id="filter-collector">
+                                    <option value="all">All Collectors</option>
+                                    <option value="auth">Auth Log (/var/log/auth.log)</option>
+                                    <option value="snort">Snort IDS</option>
+                                    <option value="network">Network Sniffer (Scapy)</option>
+                                    <option value="fim">FIM Collector</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-dropdown-wrap">
+                                <label for="sort-alerts">Sort:</label>
+                                <select id="sort-alerts">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="severity_desc">Highest Severity</option>
+                                    <option value="severity_asc">Lowest Severity</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-secondary btn-sm" id="btn-reset-filters">Reset Filters</button>
+                        </div>
+                    </div>
+
+                    <!-- Alerts Table -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Investigative Alert Ledger</h2>
+                                <p class="card-subtitle">Click any row to open the complete SOC forensic investigation dossier</p>
+                            </div>
+                            <span class="info-tag" id="alerts-filtered-count">0 alerts</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Alert ID</th>
+                                        <th>Time</th>
+                                        <th>Category</th>
+                                        <th>Detection Rule</th>
+                                        <th>Source IP</th>
+                                        <th>Collector</th>
+                                        <th>Severity</th>
+                                        <th>Risk Score</th>
+                                        <th>Action Taken</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="alerts-full-tbody">
+                                    <tr class="empty-row"><td colspan="10" class="empty-state">No security alerts recorded. Clean operational state.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Network Monitoring (Section 8) ════════════════ -->
+            <div class="page hidden" id="page-network">
+                <div class="dashboard">
+                    
+                    <!-- Network Metrics Overview -->
+                    <div class="sec-metrics-grid">
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Packets / Events</h3><span class="metric-icon-wrap info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span></div>
+                            <div class="metric-value" id="net-page-total">0</div>
+                            <div class="metric-footnote">Observed Network Frames</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>TCP Packets</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg></span></div>
+                            <div class="metric-value" id="net-count-tcp">0</div>
+                            <div class="metric-footnote">Transmission Control Protocol</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>UDP Packets</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></span></div>
+                            <div class="metric-value" id="net-count-udp">0</div>
+                            <div class="metric-footnote">User Datagram Protocol</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>ICMP Packets</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></span></div>
+                            <div class="metric-value" id="net-count-icmp">0</div>
+                            <div class="metric-footnote">Internet Control Messages</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Unique Src IPs</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span></div>
+                            <div class="metric-value" id="net-count-src-ips">0</div>
+                            <div class="metric-footnote">Transmitting Endpoints</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Unique Dst IPs</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span></div>
+                            <div class="metric-value" id="net-count-dst-ips">0</div>
+                            <div class="metric-footnote">Targeted Destination Hosts</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Network Alerts</h3><span class="metric-icon-wrap warning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 22 22 22 12 2"/></svg></span></div>
+                            <div class="metric-value color-high" id="net-count-alerts">0</div>
+                            <div class="metric-footnote">Rule Engine Detections</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Blocked Net IPs</h3><span class="metric-icon-wrap critical"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></span></div>
+                            <div class="metric-value color-critical" id="net-page-blocked">0</div>
+                            <div class="metric-footnote">Automated iptables Mitigations</div>
+                        </div>
+                    </div>
+
+                    <!-- Protocol Distribution Real-Data Bar (Section 8) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Observed Protocol Distribution</h2>
+                                <p class="card-subtitle">Calculated dynamically from real normalized network packet stream</p>
+                            </div>
+                            <span class="info-tag" id="proto-total-tag">0 packets analyzed</span>
+                        </div>
+                        <div class="proto-bar-container">
+                            <div class="proto-bar" id="proto-bar">
+                                <div class="proto-seg tcp" id="proto-seg-tcp" style="width: 0%;" title="TCP: 0%"></div>
+                                <div class="proto-seg udp" id="proto-seg-udp" style="width: 0%;" title="UDP: 0%"></div>
+                                <div class="proto-seg icmp" id="proto-seg-icmp" style="width: 0%;" title="ICMP: 0%"></div>
+                                <div class="proto-seg arp" id="proto-seg-arp" style="width: 0%;" title="ARP: 0%"></div>
+                                <div class="proto-seg dns" id="proto-seg-dns" style="width: 0%;" title="DNS: 0%"></div>
+                                <div class="proto-seg other" id="proto-seg-other" style="width: 0%;" title="Other: 0%"></div>
+                            </div>
+                            <div class="proto-legend">
+                                <div class="legend-item"><span class="legend-color tcp"></span><span>TCP (<strong id="pct-tcp">0%</strong>)</span></div>
+                                <div class="legend-item"><span class="legend-color udp"></span><span>UDP (<strong id="pct-udp">0%</strong>)</span></div>
+                                <div class="legend-item"><span class="legend-color icmp"></span><span>ICMP (<strong id="pct-icmp">0%</strong>)</span></div>
+                                <div class="legend-item"><span class="legend-color arp"></span><span>ARP (<strong id="pct-arp">0%</strong>)</span></div>
+                                <div class="legend-item"><span class="legend-color dns"></span><span>DNS (<strong id="pct-dns">0%</strong>)</span></div>
+                                <div class="legend-item"><span class="legend-color other"></span><span>Other (<strong id="pct-other">0%</strong>)</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Network Attack Taxonomy Cards (Section 8) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Network Attack Detection Taxonomy</h2>
+                                <p class="card-subtitle">Categorization of active threat detections handled by Owl Monitor engine</p>
+                            </div>
+                        </div>
+                        <div class="net-taxonomy-grid">
+                            <div class="taxonomy-col">
+                                <div class="tax-head reconnaissance">RECONNAISSANCE</div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">Port Scanning</div>
+                                    <div class="det-desc">>15 ports in 10s</div>
+                                    <div class="det-count" id="det-port_scan">0</div>
+                                </div>
+                            </div>
+
+                            <div class="taxonomy-col">
+                                <div class="tax-head dos">DENIAL OF SERVICE</div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">SYN Flood</div>
+                                    <div class="det-desc">100 SYN in 10s</div>
+                                    <div class="det-count" id="det-syn_flood">0</div>
+                                </div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">ICMP/Ping Flood</div>
+                                    <div class="det-desc">50 Echo in 10s</div>
+                                    <div class="det-count" id="det-ping_flood">0</div>
+                                </div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">DNS Flooding</div>
+                                    <div class="det-desc">50 DNS in 10s</div>
+                                    <div class="det-count" id="det-dns_flood">0</div>
+                                </div>
+                            </div>
+
+                            <div class="taxonomy-col">
+                                <div class="tax-head manipulation">NETWORK MANIPULATION</div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">ARP Spoofing</div>
+                                    <div class="det-desc">IP-to-MAC mapping conflict</div>
+                                    <div class="det-count" id="det-arp_spoofing">0</div>
+                                </div>
+                            </div>
+
+                            <div class="taxonomy-col">
+                                <div class="tax-head suspicious">SUSPICIOUS COMM</div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">DNS Tunneling</div>
+                                    <div class="det-desc">Entropy > 4.2 & len > 60</div>
+                                    <div class="det-count" id="det-dns_tunneling">0</div>
+                                </div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">Network Beaconing</div>
+                                    <div class="det-desc">Regular interval variance < 0.25</div>
+                                    <div class="det-count" id="det-beaconing">0</div>
+                                </div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">Suspicious Packets</div>
+                                    <div class="det-desc">Null/Xmas/SYN+FIN flags</div>
+                                    <div class="det-count" id="det-suspicious_packet">0</div>
+                                </div>
+                            </div>
+
+                            <div class="taxonomy-col">
+                                <div class="tax-head ids">EXTERNAL IDS</div>
+                                <div class="detection-subcard">
+                                    <div class="det-title">Snort IDS Alert</div>
+                                    <div class="det-desc">Signature trigger from fast alert log</div>
+                                    <div class="det-count" id="det-snort_alert">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Network Activity Table (Section 8) -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Live Network Activity Stream</h2>
+                                <p class="card-subtitle">Real-time network events captured by packet collector and log parsers</p>
+                            </div>
+                            <div class="filter-mini">
+                                <select id="filter-net-proto">
+                                    <option value="all">All Protocols</option>
+                                    <option value="TCP">TCP Only</option>
+                                    <option value="UDP">UDP Only</option>
+                                    <option value="ICMP">ICMP Only</option>
+                                    <option value="ARP">ARP Only</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Source IP</th>
+                                        <th>Destination IP</th>
+                                        <th>Protocol</th>
+                                        <th>Destination Port</th>
+                                        <th>Event / Detection</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="network-events-tbody">
+                                    <tr class="empty-row"><td colspan="6" class="empty-state">No network packet events ingested yet. Waiting for packet collector…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Threat Intelligence (Section 10) ════════════════ -->
+            <div class="page hidden" id="page-threat-intel">
+                <div class="dashboard">
+                    
+                    <!-- Threat Intel Provider Banner & Mock Warning (Section 10) -->
+                    <div class="card ti-provider-banner" id="ti-provider-notice">
+                        <div class="ti-banner-left">
+                            <span class="badge badge-warning">MOCK / DEMONSTRATION DATA MODE</span>
+                            <div class="ti-banner-text">
+                                <h3>Threat Intelligence Provider Active: <strong id="ti-banner-provider-name">MockProvider (Demonstration Mode)</strong></h3>
+                                <p>External Threat Intelligence lookups are currently utilizing the built-in deterministic MockProvider. When live API keys for AbuseIPDB, OTX, or VirusTotal are configured in <code>config/settings.yaml</code>, live reputation scores will take precedence.</p>
+                            </div>
+                        </div>
+                        <div class="ti-banner-right">
+                            <div class="ti-stat-pill"><span>Total Lookups:</span><strong id="ti-stat-lookups">0</strong></div>
+                            <div class="ti-stat-pill"><span>Countries Represented:</span><strong id="ti-stat-countries">0</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Threat Intel Investigated IP Table (Section 10: Multi-country simultaneous display) -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Threat Intelligence IP Dossier</h2>
+                                <p class="card-subtitle">Enriched IP reputation details across multiple geographic origins. Click any row for deep-dive investigation.</p>
+                            </div>
+                            <span class="info-tag" id="ti-table-counter">0 IPs profiled</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>IP Address</th>
+                                        <th>Country</th>
+                                        <th>Reputation Score</th>
+                                        <th>Botnet Member</th>
+                                        <th>Abuse Reports</th>
+                                        <th>ISP</th>
+                                        <th>ASN</th>
+                                        <th>Provider</th>
+                                        <th>Last Checked</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ti-tbody">
+                                    <tr class="empty-row"><td colspan="9" class="empty-state">No threat intelligence records yet. Alerts with external IPs will be enriched automatically.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: File Integrity Monitoring (Section 11) ════════════════ -->
+            <div class="page hidden" id="page-fim">
+                <div class="dashboard">
+                    
+                    <!-- FIM Overview Cards -->
+                    <div class="sec-metrics-grid">
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Monitored Files</h3><span class="metric-icon-wrap info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg></span></div>
+                            <div class="metric-value" id="fim-page-target-count">6</div>
+                            <div class="metric-footnote">System Critical Targets</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Baseline Status</h3><span class="metric-icon-wrap success"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                            <div class="metric-value color-success" id="fim-page-baseline-status">Active</div>
+                            <div class="metric-footnote">SHA-256 Hashes Cataloged</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Polling Interval</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span></div>
+                            <div class="metric-value" id="fim-page-interval">60s</div>
+                            <div class="metric-footnote">Periodic Integrity Check</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Integrity Violations</h3><span class="metric-icon-wrap critical"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 22 22 22 12 2"/></svg></span></div>
+                            <div class="metric-value color-critical" id="fim-page-violations-count">0</div>
+                            <div class="metric-footnote">Unauthorized Changes</div>
+                        </div>
+                    </div>
+
+                    <!-- Configured Monitored Files List (Section 11) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Configured Monitored Files</h2>
+                                <p class="card-subtitle">Critical filesystem targets actively baselined from <code>config/settings.yaml</code></p>
+                            </div>
+                        </div>
+                        <div class="monitored-files-list" id="fim-monitored-files-list">
+                            <div class="file-pill"><code>/etc/passwd</code><span class="pill-badge">User Accounts</span></div>
+                            <div class="file-pill"><code>/etc/shadow</code><span class="pill-badge">Password Hashes</span></div>
+                            <div class="file-pill"><code>/etc/group</code><span class="pill-badge">Group Permissions</span></div>
+                            <div class="file-pill"><code>/etc/sudoers</code><span class="pill-badge">Privilege Elevation</span></div>
+                            <div class="file-pill"><code>/etc/ssh/sshd_config</code><span class="pill-badge">SSH Daemon Config</span></div>
+                            <div class="file-pill"><code>/root/.ssh/authorized_keys</code><span class="pill-badge">Root SSH Keys</span></div>
+                        </div>
+                    </div>
+
+                    <!-- FIM Violations Table -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>File Integrity Violations</h2>
+                                <p class="card-subtitle">Cryptographic hash mismatches and metadata alterations detected by FIM collector</p>
+                            </div>
+                            <span class="info-tag" id="fim-table-counter">0 violations</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Detection Time</th>
+                                        <th>File Path</th>
+                                        <th>Violation Type</th>
+                                        <th>Owner</th>
+                                        <th>Permissions</th>
+                                        <th>Previous SHA-256</th>
+                                        <th>Current SHA-256</th>
+                                        <th>Severity</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fim-tbody">
+                                    <tr class="empty-row"><td colspan="8" class="empty-state">No file integrity violations detected. Monitored filesystem baselines are clean.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Authentication Monitoring ════════════════ -->
+            <div class="page hidden" id="page-auth">
+                <div class="dashboard">
+                    <div class="sec-metrics-grid">
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Failed SSH Logins</h3><span class="metric-icon-wrap warning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span></div>
+                            <div class="metric-value color-high" id="auth-failed">0</div>
+                            <div class="metric-footnote">Failed Credentials Recorded</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Brute-Force Attacks</h3><span class="metric-icon-wrap critical"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 22 22 22 12 2"/></svg></span></div>
+                            <div class="metric-value color-critical" id="auth-brute">0</div>
+                            <div class="metric-footnote">Thresholds Exceeded</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Target Log Source</h3><span class="metric-icon-wrap info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></span></div>
+                            <div class="metric-value" style="font-size:1.1rem; padding-top:4px;" id="auth-log-path">/var/log/auth.log</div>
+                            <div class="metric-footnote">Live Ingestion Stream</div>
+                        </div>
+                    </div>
+
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Authentication Events Log</h2>
+                                <p class="card-subtitle">Parsed authentication entries from system security logs</p>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Detection Event</th>
+                                        <th>Source IP</th>
+                                        <th>Target User</th>
+                                        <th>Severity</th>
+                                        <th>Action Taken</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="auth-tbody">
+                                    <tr class="empty-row"><td colspan="6" class="empty-state">No authentication events parsed yet. Tail stream active.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Detection Rules (Section 9 - READ-ONLY) ════════════════ -->
+            <div class="page hidden" id="page-rules">
+                <div class="dashboard">
+                    
+                    <!-- Read-Only Notice Banner -->
+                    <div class="card rules-notice-banner">
+                        <div class="rules-notice-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        </div>
+                        <div class="rules-notice-text">
+                            <h3>Owl Monitor Security Rulebook (Strictly Read-Only)</h3>
+                            <p>This page catalogs the 19 security rules, enrichment models, and planned capabilities of Owl Monitor. To prevent unauthorized operational alteration, rule definitions are loaded directly from the filesystem (<code>rules/</code> directory) and cannot be modified via the web interface. Click any rule to inspect its detection thresholds and logic.</p>
+                        </div>
+                        <div class="rules-stats-summary">
+                            <span class="rule-stat-pill">Total Capabilities: <strong>19</strong></span>
+                            <span class="rule-stat-pill">Active Rules: <strong class="color-success" id="rule-count-active">14</strong></span>
+                            <span class="rule-stat-pill">Planned / Technology: <strong class="color-medium" id="rule-count-planned">5</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Capability Filter Tabs -->
+                    <div class="card filter-bar-card">
+                        <div class="filter-controls-grid">
+                            <div class="filter-dropdown-wrap">
+                                <label for="filter-rule-cat">Domain:</label>
+                                <select id="filter-rule-cat">
+                                    <option value="all">All Domains</option>
+                                    <option value="Authentication Security">Authentication Security</option>
+                                    <option value="Network Security">Network Security</option>
+                                    <option value="File Integrity">File Integrity</option>
+                                    <option value="Threat Intelligence">Threat Intelligence</option>
+                                    <option value="Machine Learning">Machine Learning</option>
+                                    <option value="Advanced Network Monitoring">Advanced Network Monitoring</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-dropdown-wrap">
+                                <label for="filter-rule-status">Implementation Status:</label>
+                                <select id="filter-rule-status">
+                                    <option value="all">All Statuses</option>
+                                    <option value="ACTIVE">ACTIVE</option>
+                                    <option value="PARTIALLY IMPLEMENTED">PARTIALLY IMPLEMENTED</option>
+                                    <option value="PLANNED">PLANNED</option>
+                                    <option value="NOT IMPLEMENTED">NOT IMPLEMENTED</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rules Table -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Detection Capabilities & Rule Inventory</h2>
+                                <p class="card-subtitle">Verified status and detection specifications for all 19 system capabilities</p>
+                            </div>
+                            <span class="info-tag" id="rules-shown-count">19 Capabilities</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Rule / Capability Name</th>
+                                        <th>Domain</th>
+                                        <th>Detection Method</th>
+                                        <th>Data Source</th>
+                                        <th>Severity</th>
+                                        <th>Implementation Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rules-tbody">
+                                    <!-- Populated dynamically from verified capabilities catalog -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Firewall Responses (Section 12) ════════════════ -->
+            <div class="page hidden" id="page-firewall">
+                <div class="dashboard">
+                    
+                    <div class="sec-metrics-grid">
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Confirmed Blocked IPs</h3><span class="metric-icon-wrap critical"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></span></div>
+                            <div class="metric-value color-critical" id="firewall-blocked-count">0</div>
+                            <div class="metric-footnote">Active iptables Mitigations</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Firewall Mechanism</h3><span class="metric-icon-wrap info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span></div>
+                            <div class="metric-value" style="font-size:1.2rem; padding-top:4px;">Linux iptables</div>
+                            <div class="metric-footnote">INPUT Chain DROP Policy</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Default Block Duration</h3><span class="metric-icon-wrap neutral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span></div>
+                            <div class="metric-value">3600s</div>
+                            <div class="metric-footnote">Temporary Lease (1 Hour)</div>
+                        </div>
+                        <div class="card metric-card">
+                            <div class="metric-header"><h3>Host Privilege Level</h3><span class="metric-icon-wrap warning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span></div>
+                            <div class="metric-value" id="firewall-privilege-label" style="font-size:1.1rem; padding-top:4px;">Checking…</div>
+                            <div class="metric-footnote">Root Required for Kernel DROP</div>
+                        </div>
+                    </div>
+
+                    <!-- Firewall Actions Table (Section 12: Real confirmed firewall actions only) -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Confirmed Firewall Action Ledger</h2>
+                                <p class="card-subtitle">Automated response records executed by Owl Monitor FirewallResponse module</p>
+                            </div>
+                            <span class="info-tag" id="firewall-actions-counter">0 actions</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="soc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Source IP</th>
+                                        <th>Target Chain</th>
+                                        <th>Response Action</th>
+                                        <th>Lease Type</th>
+                                        <th>Confirmation Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="firewall-actions-tbody">
+                                    <tr class="empty-row"><td colspan="6" class="empty-state">No automated firewall actions recorded. Blocks will appear dynamically upon confirmed execution.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Firewall Policy Explainer -->
+                    <div class="card policy-explainer-card">
+                        <h3>Automated Response Architecture Transparency</h3>
+                        <p>Owl Monitor triggers automated firewall responses exclusively when a Sigma rule configured with <code>action: block_ip</code> is matched (e.g., SSH Brute Force, Port Scanning, SYN Flood, ARP Spoofing). When running with root/sudo privileges on Linux, the system executes <code>iptables -A INPUT -s &lt;IP&gt; -j DROP</code>. On environments without root or on non-Linux hosts, the SOAR responder logs the mitigation and flags the IP in the dashboard while transparently documenting privilege constraints.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: System Status & Transparency (Section 15) ════════════════ -->
+            <div class="page hidden" id="page-system">
+                <div class="dashboard">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2>System Health & Environmental Verification</h2>
+                                <p class="card-subtitle">Live inspection results generated by <code>DependencyChecker</code> and system collectors</p>
+                            </div>
+                            <span class="badge badge-success" id="sys-health-pill">Healthy</span>
+                        </div>
+
+                        <div class="system-inspection-grid">
+                            <!-- Python Environment -->
+                            <div class="inspect-group">
+                                <h4>PYTHON & CORE PACKAGES</h4>
+                                <div class="inspect-row"><span>Python Interpreter:</span><strong id="sys-py-ver">—</strong></div>
+                                <div class="inspect-row"><span>FastAPI Framework:</span><strong id="sys-mod-fastapi">—</strong></div>
+                                <div class="inspect-row"><span>Uvicorn Server:</span><strong id="sys-mod-uvicorn">—</strong></div>
+                                <div class="inspect-row"><span>WebSockets Library:</span><strong id="sys-mod-websockets">—</strong></div>
+                                <div class="inspect-row"><span>PyYAML Parser:</span><strong id="sys-mod-yaml">—</strong></div>
+                                <div class="inspect-row"><span>Scapy Sniffer:</span><strong id="sys-mod-scapy">—</strong></div>
+                            </div>
+
+                            <!-- Hardware & OS Drivers -->
+                            <div class="inspect-group">
+                                <h4>SYSTEM DRIVERS & PRIVILEGES</h4>
+                                <div class="inspect-row"><span>Operating System:</span><strong id="sys-os-info">Host System</strong></div>
+                                <div class="inspect-row"><span>libpcap / Npcap Driver:</span><strong id="sys-libpcap-status">Verifying…</strong></div>
+                                <div class="inspect-row"><span>Process Privileges:</span><strong id="sys-root-status">Verifying…</strong></div>
+                                <div class="inspect-row"><span>Packet Capture Capability:</span><strong id="sys-pcap-capability">—</strong></div>
+                            </div>
+
+                            <!-- Ingestion Collector Transparency -->
+                            <div class="inspect-group">
+                                <h4>INGESTION COLLECTOR STATUS</h4>
+                                <div class="inspect-row"><span>Auth Log Collector:</span><strong class="color-success">Online (/var/log/auth.log)</strong></div>
+                                <div class="inspect-row"><span>Snort IDS Collector:</span><strong class="color-success">Online (snort.alert.fast)</strong></div>
+                                <div class="inspect-row"><span>File Integrity Collector:</span><strong class="color-success" id="sys-fim-status">Active (60s poll)</strong></div>
+                                <div class="inspect-row"><span>Network Sniffer (Scapy):</span><strong id="sys-net-status">Evaluating…</strong></div>
+                                <div class="inspect-row"><span>Threat Intel Engine:</span><strong class="color-success">Active (Multi-Feed)</strong></div>
+                            </div>
+
+                            <!-- Live Streaming & API Status -->
+                            <div class="inspect-group">
+                                <h4>SOCKET STREAMING & METRICS</h4>
+                                <div class="inspect-row"><span>WebSocket Endpoint:</span><strong>/ws/alerts</strong></div>
+                                <div class="inspect-row"><span>WebSocket State:</span><strong id="sys-ws-status">Disconnected</strong></div>
+                                <div class="inspect-row"><span>REST State API:</span><strong class="color-success">Online (/api/state)</strong></div>
+                                <div class="inspect-row"><span>Server Timestamp:</span><strong id="sys-server-time">—</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ════════════════ PAGE: Settings ════════════════ -->
+            <div class="page hidden" id="page-settings">
+                <div class="dashboard">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2>Configuration Transparency</h2>
+                                <p class="card-subtitle">Active configuration loaded from <code>config/settings.yaml</code></p>
+                            </div>
+                        </div>
+                        <div class="settings-readout" id="settings-readout">
+                            <p class="info-text">Fetching sanitized configuration values…</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- ─── Detailed Alert Investigation Drawer / Modal (Section 6) ───────── -->
+        <div class="modal-overlay" id="ti-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-panel slide-in-right">
+                <div class="modal-header">
+                    <div>
+                        <span class="modal-badge-sup" id="modal-sup-category">SECURITY INCIDENT DOSSIER</span>
+                        <h2 id="modal-title">Alert Investigation</h2>
+                    </div>
+                    <button class="icon-btn close-modal" id="modal-close-btn" onclick="closeModal()" aria-label="Close modal">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Populated dynamically by safe text rendering in JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Application Script -->
+    <script src="main.js"></script>
+</body>
+</html>
